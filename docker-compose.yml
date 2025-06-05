@@ -1,10 +1,38 @@
-
 services:
+
+  stream:
+    container_name: stream
+    build:
+      context: .
+      dockerfile: Dockerfile.stream
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./scripts:/app
+    depends_on:
+      - kafka
+    networks:
+      - default 
+
+  flask:
+    container_name: flask
+    build:
+      context: .
+      dockerfile: Dockerfile.flask
+    command: flask run --host 0.0.0.0 --reload
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./flask:/app
+    networks:
+      - default 
+
   kafka:
     image: bitnami/kafka:latest
     container_name: kafka
     ports:
       - "9092:9092"
+      - "9093:9093"
     environment:
       - KAFKA_ENABLE_KRAFT=yes
       - KAFKA_CFG_PROCESS_ROLES=broker,controller
@@ -17,6 +45,8 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
     volumes:
       - kafka-data:/bitnami/kafka
+    networks:
+      - default 
 
   kafdrop:
     image: obsidiandynamics/kafdrop:latest
@@ -28,6 +58,11 @@ services:
     environment:
       - KAFKA_BROKERCONNECT=10.11.31.193:9092
       - JVM_OPTS=-Xms32M -Xmx64M
+    networks:
+      - default 
 
 volumes:
   kafka-data:
+
+networks:
+  default:
