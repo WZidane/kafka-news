@@ -4,7 +4,7 @@ RUN apt-get update
 
 WORKDIR /app
 
-RUN pip install --no-cache-dir kafka-python
+RUN pip install --no-cache-dir kafka-python feedparser
 
 COPY . .
 

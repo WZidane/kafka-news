@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+Kafka News - Le Monde
+
+{% endblock %}
+
+{% block menu %}
+    {% include "menu.html" %}
+{% endblock %}
+
+{% block content %}
+<div class="flex flex-wrap -mx-2 min-h-screen p-10">
+  {% for news in news_list %}
+    <div class="w-full lg:w-1/2 px-2 mb-4">
+      <article class="p-4 bg-white rounded-2xl shadow hover:shadow-lg transition-shadow duration-300 border border-gray-200 h-full">
+        <header class="mb-2">
+          <a href="{{ news.link }}" target="_blank" rel="noopener noreferrer" class="text-xl font-semibold text-blue-600 hover:underline">
+            {{ news.title }}
+          </a>
+        </header>
+        <p class="text-sm text-gray-500 mb-2">{{ news.published }}</p>
+        <p class="text-gray-700">{{ news.summary }}</p>
+      </article>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
+
+{% block footer %}
+    {% include "footer.html" %}
+{% endblock %}
