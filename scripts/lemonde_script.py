@@ -9,12 +9,11 @@ import logging
 
 # --- Configurable via variables d’environnement ---
 RSS_FEEDS = [
-    "https://partner-feeds.20min.ch/rss/20minutes",
-    "https://www.lemonde.fr/rss/une.xml"
+    "https://www.lemonde.fr/rss/une.xml",
 ]
 
-BOOTSTRAP_SERVERS = "kafka:9092"
-TOPIC =  "raw-news"
+BOOTSTRAP_SERVERS = "kafka-1:9092"
+TOPIC =  "lemonde-news"
 POLL_INTERVAL = 300  # secondes
 
 # --- Kafka Producer ---

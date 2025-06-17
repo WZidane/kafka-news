@@ -14,8 +14,8 @@ def home_():
 def lemonde_():
 
     consumer = KafkaConsumer(
-        'raw-news',
-        bootstrap_servers='10.11.31.193:9092',
+        'lemonde-news',
+        bootstrap_servers='kafka-1:9092',
         auto_offset_reset='earliest',
         enable_auto_commit=False,
         group_id='flask-viewer',
@@ -26,7 +26,7 @@ def lemonde_():
 
     try: 
 
-        if message in consumer:
+        if consumer:
             for message in consumer:
                 data = message.value
 
@@ -55,8 +55,8 @@ def lemonde_():
 @news.route('/news/20minutes')
 def vingtminutes_():
     consumer = KafkaConsumer(
-        'raw-news',
-        bootstrap_servers='10.11.31.193:9092',
+        '20minutes-news',
+        bootstrap_servers='kafka-1:9092',
         auto_offset_reset='earliest',
         enable_auto_commit=False,
         group_id='flask-viewer',
@@ -67,7 +67,7 @@ def vingtminutes_():
 
     try: 
 
-        if message in consumer:
+        if consumer:
             for message in consumer:
                 data = message.value
 
@@ -91,4 +91,4 @@ def vingtminutes_():
     except:
         pass
 
-    return render_template('vingtminutes.html', news_list=messages)
+    return render_template('20minutes.html', news_list=messages)
