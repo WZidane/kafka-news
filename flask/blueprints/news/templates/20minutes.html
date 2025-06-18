@@ -12,7 +12,7 @@ Kafka News - 20 Minutes
 
 {% block content %}
 <div class="flex flex-wrap -mx-2 min-h-screen p-10 bg-gradient-to-br from-blue-100 to-white">
-  {% if news_list %}
+  {% if news_list and end_offset >= offset %}
     {% for news in news_list %}
       <div class="w-full lg:w-1/2 px-2 mb-4">
         <article class="p-4 bg-white rounded-2xl shadow hover:shadow-lg transition-shadow duration-300 border border-gray-200 h-full">
@@ -32,6 +32,18 @@ Kafka News - 20 Minutes
       <h1 class="text-xl font-bold text-blue-700">Il n'y a pas d'article pour l'instant.</h1>
     </div>
   {% endif %}
+  
+    {% if prev_offset >= 0 and offset != 0 %}
+    <div class="flex w-full justify-between mt-6">
+        <a href="{{ url_for('news.vingtminutes_') }}/?offset={{ prev_offset }}" class="px-4 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700 transition duration-200 h-10">← Page précédente</a>
+    {% else %}
+    <div class="flex w-full justify-end mt-6">
+    {% endif %}
+
+    {% if has_more and end_offset >= offset %}
+        <a href="{{ url_for('news.vingtminutes_') }}/?offset={{ next_offset }}" class="px-4 py-2 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700 transition duration-200 h-10">Page suivante →</a>
+    {% endif %}
+  </div>
 </div>
 {% endblock %}
 
