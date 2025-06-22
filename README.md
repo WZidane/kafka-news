@@ -1,6 +1,6 @@
 # Application Kafka News
 
-Lancer tous les conteneurs Docker ainsi que les scripts pour faire créer les topics et faire fonctionner la récupération des flux RSS, voici les différentes commandes :
+Pour utiliser l'application Kafka News, il faut lancer tous les conteneurs Docker ainsi que les scripts pour faire créer les topics et faire fonctionner la récupération des flux RSS, voici les différentes commandes :
 
 - docker compose up -d --build
 
